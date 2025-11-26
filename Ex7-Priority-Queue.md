@@ -1,42 +1,92 @@
-# Ex7 Priority Queue
-## DATE:
+# Ex7 Removal of Nodes with a Specific Value from a Linked List
+
+## DATE:26-11-2025
+
+### Developed by
+**Name:** MONISH S
+
+**Register Number:** 212223040115
+
 ## AIM:
-To formulate the C code to display the elements of the priority queue after insertion and deletion operation.
+To write a Java program that removes all nodes from a linked list whose value matches a given integer (val) and returns the new head of the modified linked list.
 
 ## Algorithm
-1. Start the program.
-2. Define a function printArray() that takes an array and its size as parameters.
-3. Loop through the array from index 0 to size-1.
-4. Print each element of the array during the loop. 
-5. After printing all elements, print a newline for formatting.
-6. End the program.  
+1. Start the program.  
+2. Define a `Node` class containing `data` and `next`.  
+3. Create a linked list by inserting elements.  
+4. Traverse the list and remove nodes whose data equals the specified value.  
+5. Adjust pointers to skip deleted nodes and maintain the linked list.  
+6. Display the modified linked list.  
+7. Stop the program.  
 
 ## Program:
-```
-/*
-Program to o display the elements of the priority queue after insertion and deletion operation
-Developed by: MONISH S
-RegisterNumber:  212223040115
-*/
-/*
-/*#include <stdio.h> 
-int size = 0; 
-*/ 
-void printArray(int array[], int size) 
-{ 
-int i; 
-for(i=0;i<size;i++) 
-{ 
-printf("%d ",array[i]); 
-} 
-printf("\n"); 
+```java
+
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node next;
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class RemoveValueLinkedList {
+    static Node removeElements(Node head, int val) {
+        while (head != null && head.data == val) {
+            head = head.next;
+        }
+        Node current = head;
+        while (current != null && current.next != null) {
+            if (current.next.data == val) {
+                current.next = current.next.next;
+            } else {
+                current = current.next;
+            }
+        }
+        return head;
+    }
+
+    static void display(Node head) {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Node head = null, tail = null;
+        System.out.print("Enter number of elements: ");
+        int n = sc.nextInt();
+        System.out.println("Enter elements:");
+        for (int i = 0; i < n; i++) {
+            int val = sc.nextInt();
+            Node newNode = new Node(val);
+            if (head == null) {
+                head = tail = newNode;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
+            }
+        }
+        System.out.print("Enter value to remove: ");
+        int value = sc.nextInt();
+        head = removeElements(head, value);
+        System.out.println("Linked list after removal:");
+        display(head);
+        sc.close();
+    }
 }
 ```
+## OUTPUT
 
-## Output:
-![image](https://github.com/user-attachments/assets/5441f2b9-18a7-40d7-82cd-1a8798fa846d)
+<img width="1293" height="392" alt="image" src="https://github.com/user-attachments/assets/01d47c19-adc7-4f66-8fce-0f088c6474c7" />
 
 
-
-## Result:
-Thus, the C program to display the elements of the priority queue after insertion and deletion operation is implemented successfully
+## RESULT
+The Java program successfully removes all nodes with the specified value (val) from the linked list and returns the new head.
